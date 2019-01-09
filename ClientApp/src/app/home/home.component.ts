@@ -5,14 +5,15 @@ import { CameraComponent } from '../camera/camera.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { ParticipantsComponent } from '../participants/participants.component';
 import { VideoChatService } from '../services/videochat.service';
+import { Profile, AccountService } from '../services/account.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 
 @Component({
-    selector: 'app-layout',
-    styleUrls: ['./layout.component.css'],
-    templateUrl: './layout.component.html',
+    selector: 'app-home',
+    styleUrls: ['./home.component.css'],
+    templateUrl: './home.component.html',
 })
-export class LayoutComponent implements OnInit {
+export class HomeComponent implements OnInit {
     @ViewChild('rooms') rooms: RoomsComponent;
     @ViewChild('camera') camera: CameraComponent;
     @ViewChild('settings') settings: SettingsComponent;
@@ -21,10 +22,19 @@ export class LayoutComponent implements OnInit {
     private notificationHub: HubConnection;
     private activeRoom: Room;
 
-    constructor(
-        private readonly videoChatService: VideoChatService) { }
+    user: Profile;
 
-    ngOnInit() {
+    get host() {
+        return location.origin;
+    }
+
+    constructor(
+        private readonly videoChatService: VideoChatService,
+        private readonly accountService: AccountService) { }
+
+    async ngOnInit() {
+        this.user = await this.accountService.getProfile();
+
         const builder =
             new HubConnectionBuilder()
                 .configureLogging(LogLevel.Trace)
@@ -74,6 +84,10 @@ export class LayoutComponent implements OnInit {
 
             this.notificationHub.send('RoomsUpdated', true);
         }
+    }
+
+    async onSignOut() {
+        await this.accountService.signOut();
     }
 
     private isDetachable(track: LocalTrack): track is LocalAudioTrack | LocalVideoTrack {

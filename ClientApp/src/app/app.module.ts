@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ParticipantsComponent } from './participants/participants.component';
 import { CameraComponent } from './camera/camera.component';
@@ -15,11 +18,13 @@ import { ActivityIndicatorComponent } from './activity-indicator/activity-indica
 import { VideoChatService } from './services/videochat.service';
 import { DeviceService } from './services/device.service';
 import { StorageService } from './services/storage.service';
+import { AccountService } from './services/account.service';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LayoutComponent,
+        LoginComponent,
+        HomeComponent,
         RoomsComponent,
         ParticipantsComponent,
         CameraComponent,
@@ -30,9 +35,15 @@ import { StorageService } from './services/storage.service';
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        AppRoutingModule
     ],
-    providers: [DeviceService, VideoChatService, StorageService],
-    bootstrap: [AppComponent]
+    providers: [
+        DeviceService,
+        VideoChatService,
+        StorageService,
+        AccountService
+    ],
+    bootstrap: [ AppComponent ]
 })
 export class AppModule { }

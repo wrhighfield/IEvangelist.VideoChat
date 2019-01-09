@@ -1,0 +1,17 @@
+#login {
+    height: 100vh;
+    position: relative;
+}
+
+    #login > div.center {
+        width: 350px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 100px 0 #942f00;
+    }
+
+button {
+    cursor: pointer;
+}

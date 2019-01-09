@@ -1,0 +1,22 @@
+<div id="login">
+    <div class="card mb-3 center">
+        <h3 class="card-header bg-danger text-center">Login</h3>
+        <div class="card-body">
+            <h5 class="card-title text-muted">
+                Select one of the authentication providers below to continue.
+            </h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <button *ngFor="let provider of providers"
+                    class="lead list-group-item list-group-item-action pl-lg-5"
+                    (click)="onSignin(provider)">
+                <h4>
+                    <i class="fab" [ngClass]="toIcon(provider.name)"></i> &nbsp; Sign in with {{ provider.name }}
+                </h4>
+            </button>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <span class="text-center">&copy; IEvangelist - {{ copyrightYear }}</span>
+        </div>
+    </div>
+</div>

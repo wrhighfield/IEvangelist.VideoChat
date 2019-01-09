@@ -30,7 +30,16 @@
     border-bottom: solid 6px #F22F46;
 }
 
-.grid-top-left,
+.grid-top-left {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+    .grid-top-left > div > a {
+        font-size: 1.75rem;
+    }
+
 .grid-top-right,
 .grid-bottom-left,
 .grid-bottom-right {

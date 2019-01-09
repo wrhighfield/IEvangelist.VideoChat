@@ -41,14 +41,15 @@ namespace IEvangelist.VideoChat.Services
         {
             var rooms = await RoomResource.ReadAsync();
             var tasks = rooms.Select(
-                room => GetRoomDetailsAsync(room, 
-                                            ParticipantResource.ReadAsync(room.Sid, 
-                                                                          ParticipantStatus.Connected)));
+                room => GetRoomDetailsAsync(
+                    room,
+                    ParticipantResource.ReadAsync(room.Sid, ParticipantStatus.Connected)));
 
             return await Task.WhenAll(tasks);
 
-            async Task<RoomDetails> GetRoomDetailsAsync(RoomResource room,
-                                                        Task<ResourceSet<ParticipantResource>> participantTask)
+            async Task<RoomDetails> GetRoomDetailsAsync(
+                RoomResource room,
+                Task<ResourceSet<ParticipantResource>> participantTask)
             {
                 var participants = await participantTask;
                 return new RoomDetails

@@ -1,10 +1,14 @@
 using System.Threading.Tasks;
 using IEvangelist.VideoChat.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IEvangelist.VideoChat.Controllers
 {
-    [Route("api/video")]
+    [
+        Authorize,
+        Route("api/video")
+    ]
     public class VideoController : Controller
     {
         readonly IVideoService _videoService;
@@ -14,7 +18,7 @@ namespace IEvangelist.VideoChat.Controllers
 
         [HttpGet("token/{roomName?}")]
         public IActionResult GetToken(string roomName)
-            => Json(new { token = _videoService.GetTwilioJwt(User.Identity.Name ?? "guest", roomName) });
+            => Json(new { token = _videoService.GetTwilioJwt(User.Identity.Name, roomName) });
 
         [HttpGet("rooms")]
         public async Task<IActionResult> GetRooms() 

@@ -1,0 +1,38 @@
+<div class="grid-container">
+    <div class="grid-top-left">
+        <a href="https://www.twilio.com/video" target="_blank">
+            <img src="assets/twilio-badge-red.png" alt="Powered by Twilio" />
+        </a>
+    </div>
+    <div class="grid-bottom-right">
+        <a href="https://twitter.com/davidpine7" target="_blank"><i class="fab fa-twitter"></i> @davidpine7</a>
+    </div>
+    <div class="grid-left">
+        <app-rooms #rooms (roomChanged)="onRoomChanged($event)"></app-rooms>
+    </div>
+    <div class="grid-content">
+        <app-camera #camera></app-camera>
+        <app-participants #participants></app-participants>
+    </div>
+    <div class="grid-right">
+        <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
+    </div>
+    <div class="grid-top-right">
+        <div *ngIf="user">
+            <h5>
+                Hi, {{ user.name }} &nbsp;
+                <button type="button" class="btn btn-lg btn-danger"
+                        (click)="onSignOut()">
+                    Sign Out &nbsp; <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </h5>
+        </div>
+    </div>
+</div>
+
+<a id="gitlink" target="_blank"
+   href="https://github.com/IEvangelist/IEvangelist.VideoChat">
+    <img style="position: absolute; top: 0; left: 0; border: 0;"
+         src="http://aral.github.io/fork-me-on-github-retina-ribbons/left-dusk-blue.png"
+         alt="Fork me on GitHub">
+</a>
